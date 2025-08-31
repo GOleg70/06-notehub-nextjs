@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode, MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
 
@@ -13,7 +13,6 @@ export default function Modal({ onClose, children }: ModalProps) {
   const [modalRoot, setModalRoot] = useState<Element | null>(null);
 
   useEffect(() => {
-    // Ця функція буде виконуватися тільки на клієнті
     function ensureModalRoot() {
       let root = document.getElementById("modal-root");
       if (!root) {
@@ -41,11 +40,18 @@ export default function Modal({ onClose, children }: ModalProps) {
   }, [onClose]);
 
   if (!modalRoot) {
-    return null; // Не рендеримо, поки `modalRoot` не визначено на клієнті
+    return null;
   }
+  
+ 
+  const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+      if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   return createPortal(
-    <div className={css.backdrop} role="dialog" aria-modal="true" onClick={onClose}>
+    <div className={css.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

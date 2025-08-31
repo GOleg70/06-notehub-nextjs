@@ -1,6 +1,6 @@
 // app/notes/page.tsx
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import getQueryClient from "@/lib/api/gitQueryClient";
+import getQueryClient from "@/lib/api/getQueryClient";
 import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 

@@ -1,5 +1,5 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
-import getQueryClient from "@/lib/api/gitQueryClient";
+import getQueryClient from "@/lib/api/getQueryClient";
 import { fetchNoteById } from "@/lib/api";
 import NoteDetailsClient from "./NoteDetails.client";
 
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default async function NoteDetailsPage({ params }: Props) {
-  const { id } = await params; // ✅ треба await
+  const { id } = await params; // треба await
 
   const queryClient = getQueryClient();
 

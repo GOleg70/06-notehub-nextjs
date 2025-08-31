@@ -13,6 +13,7 @@ export default function NoteDetailsClient({ id }: Props) {
   const { data: note, isLoading, isError } = useQuery<Note>({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
+    refetchOnMount: false, 
   });
 
   if (isLoading) {
